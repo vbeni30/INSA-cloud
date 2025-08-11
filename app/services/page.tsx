@@ -2,301 +2,333 @@
 
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/sections/footer"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {
-  Server,
-  Shield,
-  Database,
-  Network,
-  Monitor,
-  Globe,
-  Users,
-  GraduationCap,
-  ArrowRight,
-  CheckCircle,
-  Clock,
-  Star,
-} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Server, HardDrive, Database, Shield, Wifi, Globe, Headphones, GraduationCap, Monitor, ArrowRight, CheckCircle, Clock, Star } from 'lucide-react'
 import Link from "next/link"
+import { motion } from "framer-motion"
+
+const services = [
+  {
+    id: "cloud-servers",
+    title: "Cloud Servers",
+    description:
+      "Flexible and scalable virtual machine servers designed to handle various workloads, from web hosting to enterprise applications.",
+    icon: <Server className="h-8 w-8" />,
+    types: ["General Purpose", "Compute Optimized", "Memory Optimized", "Storage Optimized"],
+    pricing: {
+      ssd: "SSD Based: (vCPU × 930) + (RAM × 210) + (Storage × 10) Birr/month",
+      hdd: "HDD Based: (vCPU × 930) + (RAM × 210) + (Storage × 5) Birr/month",
+    },
+    popular: true,
+  },
+  {
+    id: "backup-services",
+    title: "Backup Services for Cloud Servers",
+    description:
+      "Automated backup solutions to protect cloud server data ensuring business continuity and data safety.",
+    icon: <Database className="h-8 w-8" />,
+    types: ["Full backup", "Snapshot backup", "Encrypted"],
+    pricing: {
+      hdd: "HDD: 11 Birr/GB/month",
+    },
+  },
+  {
+    id: "storage-archival",
+    title: "Storage and Archival Services",
+    description:
+      "Flexible cloud storage solutions designed to meet various performance needs, from high-speed SSD storage to cost-effective HDD storage for long-term archival.",
+    icon: <HardDrive className="h-8 w-8" />,
+    types: ["Cloud SSD Storage", "Cloud HDD Storage"],
+    pricing: {
+      ssd: "SSD: 20 Birr/GB/Month",
+      hdd: "HDD: 11 Birr/GB/Month",
+    },
+  },
+  {
+    id: "remote-access",
+    title: "Remote Access Services",
+    description: "Secure remote access solutions enabling users to connect to their cloud resources.",
+    icon: <Shield className="h-8 w-8" />,
+    types: ["Remote Access Portal (RAP)", "WireGuard VPN"],
+    pricing: {
+      rap: "RAP: Starting from 100 Birr/User/Month",
+      vpn: "WireGuard VPN: Starting from 150 Birr/User/Month",
+    },
+  },
+  {
+    id: "monitoring-security",
+    title: "Monitoring and Security Services",
+    description:
+      "A fully managed service providing real time monitoring and security event detection. This service is managed entirely by INSA ensuring proactive management and response.",
+    icon: <Monitor className="h-8 w-8" />,
+    types: ["Managed SIEM Agent", "Managed Service and Health Monitoring Agent"],
+    pricing: {
+      siem: "Starting from 1000 Birr/SIEM-agent/month",
+      monitoring: "Starting from 500 Birr/Mon-agent/month",
+    },
+    featured: true,
+  },
+  {
+    id: "internet-bandwidth",
+    title: "Internet Bandwidth",
+    description: "Scalable Internet bandwidth options to match your cloud needs.",
+    icon: <Wifi className="h-8 w-8" />,
+    types: ["Measured by Mbps"],
+    pricing: {
+      custom: "Maximum Rate limit with Custom Quote (Future Plan)",
+    },
+  },
+  {
+    id: "public-ip",
+    title: "Public IP",
+    description: "Public IP addresses assigned exclusively to your cloud resources.",
+    icon: <Globe className="h-8 w-8" />,
+    types: ["Shared", "Dedicated"],
+    pricing: {
+      shared: "Shared: Free",
+      dedicated: "Dedicated: 18 Birr/IP/Month",
+    },
+  },
+  {
+    id: "support-services",
+    title: "Support Services",
+    description:
+      "24/7 technical support services tailored to help manage and troubleshoot cloud environments, ensuring smooth operations and quick resolution of technical issues.",
+    icon: <Headphones className="h-8 w-8" />,
+    types: [
+      "Basic Support: Email support with response times during business hours",
+      "Premium Support: Phone and email support with prioritized response times. With dedicated support manager",
+    ],
+    pricing: {
+      basic: "Basic Support: Starting from 500 Birr/month",
+      premium: "Premium Support: Starting from 1000 Birr/month",
+    },
+  },
+  {
+    id: "training-deployment",
+    title: "Custom Training and Deployment Assistance",
+    description:
+      "Tailored training and consulting services designed to help customers efficiently deploy, manage, and optimize their cloud environments.",
+    icon: <GraduationCap className="h-8 w-8" />,
+    types: ["Custom Training Sessions Only", "Deployment Assistance and Consulting Package"],
+    pricing: {
+      custom: "Determined based on individual customer requirements. Contact us for a customized quote.",
+    },
+  },
+]
 
 export default function ServicesPage() {
-  const services = [
-    {
-      id: 1,
-      icon: Server,
-      title: "Cloud Servers",
-      description:
-        "Flexible and scalable virtual machine servers designed to handle various workloads, from web hosting to enterprise applications.",
-      categories: ["General Purpose", "Compute Optimized", "Memory Optimized", "Storage Optimized"],
-      pricing: {
-        ssd: "SSD: (vCPU × 930) + (RAM × 210) + (Storage × 10) Birr/month",
-        hdd: "HDD: (vCPU × 930) + (RAM × 210) + (Storage × 5) Birr/month",
-      },
-      link: "/services/cloud-servers",
-      featured: true,
-    },
-    {
-      id: 2,
-      icon: Shield,
-      title: "Backup Services for Cloud Servers",
-      description:
-        "Automated backup solutions to protect cloud server data ensuring business continuity and data safety.",
-      categories: ["Full backup", "Snapshot backup", "Encrypted"],
-      pricing: {
-        base: "HDD: 11 Birr/GB/month",
-      },
-      link: "/services/backup-services",
-    },
-    {
-      id: 3,
-      icon: Database,
-      title: "Storage and Archival Services",
-      description:
-        "Flexible cloud storage solutions designed to meet various performance needs, from high-speed SSD storage to cost-effective HDD storage.",
-      categories: ["Cloud SSD Storage", "Cloud HDD Storage"],
-      pricing: {
-        ssd: "SSD: 20 Birr/GB/month",
-        hdd: "HDD: 11 Birr/GB/month",
-      },
-      link: "/services/storage-archival",
-    },
-    {
-      id: 4,
-      icon: Network,
-      title: "Remote Access Services",
-      description: "Secure remote access solutions enabling users to connect to their cloud resources from anywhere.",
-      categories: ["Remote Access Portal (RAP)", "WireGuard VPN"],
-      pricing: {
-        rap: "RAP: Starting from 100 Birr/User/month",
-        vpn: "WireGuard VPN: Starting from 150 Birr/User/month",
-      },
-      link: "/services/remote-access",
-      featured: true,
-    },
-    {
-      id: 5,
-      icon: Monitor,
-      title: "Monitoring and Security Services",
-      description:
-        "A fully managed service providing real-time monitoring and security event detection. This service is managed entirely by INSA.",
-      categories: ["Managed SIEM Agent", "Managed Service and Health Monitoring Agent"],
-      pricing: {
-        siem: "SIEM: Starting from 1000 Birr/agent/month",
-        monitoring: "Monitoring: Starting from 500 Birr/agent/month",
-      },
-      link: "/services/monitoring-security",
-      featured: true,
-    },
-    {
-      id: 6,
-      icon: Globe,
-      title: "Internet Bandwidth",
-      description: "Scalable Internet bandwidth options to match your cloud needs with flexible rate limiting.",
-      categories: ["Measured by Mbps"],
-      pricing: {
-        custom: "Maximum Rate limit with Custom Quote (Future Plan)",
-      },
-      link: "/services/internet-bandwidth",
-    },
-    {
-      id: 7,
-      icon: Network,
-      title: "Public IP",
-      description: "Public IP addresses assigned exclusively to your cloud resources for direct internet access.",
-      categories: ["Shared", "Dedicated"],
-      pricing: {
-        shared: "Shared: Free",
-        dedicated: "Dedicated: 18 Birr/IP/month",
-      },
-      link: "/services/public-ip",
-    },
-    {
-      id: 8,
-      icon: Users,
-      title: "Support Services",
-      description: "24/7 technical support services tailored to help manage and troubleshoot cloud environments.",
-      categories: ["Basic Support", "Premium Support"],
-      pricing: {
-        basic: "Basic: Starting from 500 Birr/month",
-        premium: "Premium: Starting from 1000 Birr/month",
-      },
-      link: "/services/support-services",
-    },
-    {
-      id: 9,
-      icon: GraduationCap,
-      title: "Custom Training and Deployment Assistance",
-      description:
-        "Tailored training and consulting services designed to help customers efficiently deploy, manage, and optimize their cloud environments.",
-      categories: ["Custom Training Sessions", "Deployment Assistance and Consulting Package"],
-      pricing: {
-        custom: "Determined based on individual customer requirements - Contact us for a customized quote",
-      },
-      link: "/services/training-deployment",
-    },
-  ]
-
-  const slaInfo = {
-    infrastructure: "99.99%",
-    accessibility: "95.95%",
-    support: "24/7",
-  }
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-blue-50 py-24">
+      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 py-24 lg:py-32">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <Badge variant="outline" className="mb-6 text-blue-600 border-blue-200">
-              INSA Government Cloud Services
-            </Badge>
-            <h1 className="text-5xl font-bold text-slate-900 mb-8 leading-tight">
-              Comprehensive Cloud Service Catalog
+            <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-6">
+              <Shield className="h-4 w-4 mr-2" />
+              Government Grade Cloud Services
+            </div>
+            <h1 className="text-4xl lg:text-6xl font-bold text-slate-900 mb-8 leading-tight">
+              INSA G-Cloud
+              <span className="block text-green-600">Service Catalog</span>
             </h1>
-            <p className="text-xl text-slate-600 leading-relaxed mb-8">
-              Secure, reliable, and scalable cloud solutions designed specifically for government institutions. Our
-              comprehensive offerings support mission-critical operations with robust and adaptable solutions.
+            <p className="text-xl lg:text-2xl text-slate-600 mb-12 leading-relaxed">
+              Comprehensive cloud solutions designed specifically for government agencies. Our services ensure seamless
+              performance while maintaining the highest level of security and compliance.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>
-                <Link href="#services">
-                  Explore Services
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/contact">Get Custom Quote</Link>
-              </Button>
+
+            {/* Key Features */}
+            <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              <div className="flex items-center justify-center bg-white px-6 py-4 rounded-xl shadow-sm border border-slate-200">
+                <Shield className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                <span className="text-slate-700 font-medium">Government Grade Security</span>
+              </div>
+              <div className="flex items-center justify-center bg-white px-6 py-4 rounded-xl shadow-sm border border-slate-200">
+                <Server className="h-5 w-5 text-blue-500 mr-3 flex-shrink-0" />
+                <span className="text-slate-700 font-medium">99.99% Infrastructure Uptime</span>
+              </div>
+              <div className="flex items-center justify-center bg-white px-6 py-4 rounded-xl shadow-sm border border-slate-200">
+                <Headphones className="h-5 w-5 text-purple-500 mr-3 flex-shrink-0" />
+                <span className="text-slate-700 font-medium">24/7 Support Available</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SLA Section */}
-      <section className="py-16 bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Service Level Agreements</h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              INSA will exert every possible effort to ensure the maximum availability of the cloud infrastructure while
-              adhering to operational functionality parameters.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="h-8 w-8 text-green-600" />
-                </div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-2">{slaInfo.infrastructure}</h3>
-                <p className="text-slate-600">Uptime annually for electricity and air conditioning</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Globe className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-2">{slaInfo.accessibility}</h3>
-                <p className="text-slate-600">Uptime annually for cloud infrastructure accessibility</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-8 w-8 text-purple-600" />
-                </div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-2">{slaInfo.support}</h3>
-                <p className="text-slate-600">Monitoring and technical support availability</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-slate-500">
-              * Uptime excludes scheduled maintenance windows and unforeseen circumstances beyond INSA's control
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Services Grid */}
-      <section id="services" className="py-24 bg-slate-50">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-6">Our Cloud Services</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Our Cloud Services</h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Nine comprehensive cloud services designed to meet all your government organization's IT infrastructure
-              needs with security, compliance, and reliability at the forefront.
+              Choose from our comprehensive range of cloud services, each designed to meet the specific needs of
+              government agencies with robust security and reliability.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-            {services.map((service) => (
-              <Card
+            {services.map((service, index) => (
+              <motion.div
                 key={service.id}
-                className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 h-full ${
-                  service.featured ? "ring-2 ring-blue-200 bg-gradient-to-br from-white to-blue-50" : ""
-                }`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="h-full"
               >
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <service.icon className="h-6 w-6 text-blue-600" />
-                    </div>
-                    {service.featured && (
-                      <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                <Card
+                  className={`h-full hover:shadow-xl transition-all duration-300 group cursor-pointer relative border-0 shadow-lg ${
+                    service.featured
+                      ? "bg-gradient-to-br from-green-50 to-emerald-50 ring-2 ring-green-200"
+                      : "bg-white"
+                  }`}
+                >
+                  {service.popular && (
+                    <div className="absolute -top-3 left-6 z-10">
+                      <Badge className="bg-red-500 hover:bg-red-600 text-white shadow-lg">
                         <Star className="h-3 w-3 mr-1" />
-                        Popular
+                        Most Popular
                       </Badge>
-                    )}
-                  </div>
-                  <CardTitle className="text-xl text-slate-900 leading-tight">{service.title}</CardTitle>
-                </CardHeader>
-
-                <CardContent className="space-y-6">
-                  <p className="text-slate-600 leading-relaxed">{service.description}</p>
-
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-3">Service Types:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {service.categories.map((category, idx) => (
-                        <Badge key={idx} variant="outline" className="text-xs">
-                          {category}
-                        </Badge>
-                      ))}
                     </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-3">Pricing:</h4>
-                    <div className="space-y-2">
-                      {Object.entries(service.pricing).map(([key, value], idx) => (
-                        <p key={idx} className="text-sm text-slate-600 bg-slate-50 p-2 rounded">
-                          {value}
-                        </p>
-                      ))}
+                  )}
+                  {service.featured && (
+                    <div className="absolute -top-3 left-6 z-10">
+                      <Badge className="bg-green-500 hover:bg-green-600 text-white shadow-lg">Fully Managed</Badge>
                     </div>
-                  </div>
+                  )}
 
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
-                    <Link href={service.link}>
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+                  <CardHeader className="pb-4">
+                    <div
+                      className={`inline-flex p-4 rounded-xl mb-6 w-fit transition-colors ${
+                        service.featured
+                          ? "bg-green-100 text-green-600 group-hover:bg-green-200"
+                          : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
+                      }`}
+                    >
+                      {service.icon}
+                    </div>
+                    <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-green-600 transition-colors mb-3">
+                      {service.title}
+                    </CardTitle>
+                    <CardDescription className="text-slate-600 leading-relaxed text-base">
+                      {service.description}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="pt-0">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold text-slate-900 mb-4 text-sm uppercase tracking-wide">
+                          Service Types
+                        </h4>
+                        <ul className="space-y-3">
+                          {service.types.map((type, idx) => (
+                            <li key={idx} className="flex items-start text-sm text-slate-600">
+                              <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+                              <span className="leading-relaxed">{type}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="border-t border-slate-200 pt-6">
+                        <h4 className="font-semibold text-slate-900 mb-4 text-sm uppercase tracking-wide">Pricing</h4>
+                        <div className="space-y-2">
+                          {Object.entries(service.pricing).map(([key, value]) => (
+                            <div key={key} className="text-sm">
+                              <span className="font-medium text-green-600">{value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="pt-4">
+                        <Link href={`/services/${service.id}`} className="block">
+                          <Button className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg transition-all duration-200 group-hover:shadow-lg">
+                            View Details
+                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SLA Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Service Level Agreements</h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              INSA will exert every possible effort to ensure the maximum availability of the cloud infrastructure
+              created and allocated to its customers while adhering to operational functionality parameters.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center text-xl font-bold text-slate-900">
+                  <div className="p-3 bg-green-100 rounded-lg mr-4">
+                    <Server className="h-6 w-6 text-green-600" />
+                  </div>
+                  Infrastructure Uptime
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-5xl font-bold text-green-600 mb-4">99.99%</div>
+                <p className="text-slate-600 leading-relaxed">
+                  Uptime annually for electricity and/or air conditioning systems ensuring continuous operation of your
+                  cloud infrastructure.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center text-xl font-bold text-slate-900">
+                  <div className="p-3 bg-blue-100 rounded-lg mr-4">
+                    <Globe className="h-6 w-6 text-blue-600" />
+                  </div>
+                  Cloud Accessibility
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-5xl font-bold text-blue-600 mb-4">95.95%</div>
+                <p className="text-slate-600 leading-relaxed">
+                  Uptime annually for the accessibility of the cloud infrastructure created and allocated by INSA for
+                  its clients.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 max-w-4xl mx-auto">
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+              <div className="flex items-start">
+                <div className="p-2 bg-amber-100 rounded-lg mr-4 flex-shrink-0">
+                  <Clock className="h-5 w-5 text-amber-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-amber-800 mb-2">Important Notice</h4>
+                  <p className="text-amber-700 leading-relaxed">
+                    Uptime excludes scheduled maintenance windows and unforeseen circumstances beyond INSA's control.
+                    All maintenance activities are scheduled during off-peak hours with advance notification.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -305,58 +337,75 @@ export default function ServicesPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-6">Terms and Conditions</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Terms and Conditions</h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Important information about our service offerings and pricing structure
+              Clear and transparent terms to ensure smooth service delivery and customer satisfaction.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Pricing & Contracts</h3>
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <Card className="bg-white border-0 shadow-lg">
+              <CardHeader className="pb-6">
+                <CardTitle className="text-xl font-bold text-slate-900 flex items-center">
+                  <div className="p-2 bg-green-100 rounded-lg mr-3">
+                    <CheckCircle className="h-5 w-5 text-green-600" />
+                  </div>
+                  Pricing & Contracts
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                    <span className="text-slate-600 leading-relaxed">
                       All pricing is based on standard configurations and usage; custom solutions may incur additional
                       costs.
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">Discounts available for long-term contracts.</span>
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                    <span className="text-slate-600 leading-relaxed">
+                      Discounts available for long-term contracts.
+                    </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">
-                      Service modifications during the contract period may result in price adjustments.
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                    <span className="text-slate-600 leading-relaxed">
+                      Service modifications during the contract period may result in price adjustments. Changes will be communicated and agreed upon before implementation.
                     </span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Customer Responsibilities</h3>
+            <Card className="bg-white border-0 shadow-lg">
+              <CardHeader className="pb-6">
+                <CardTitle className="text-xl font-bold text-slate-900 flex items-center">
+                  <div className="p-2 bg-blue-100 rounded-lg mr-3">
+                    <Headphones className="h-5 w-5 text-blue-600" />
+                  </div>
+                  Customer Responsibilities
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">
-                      Customers are responsible for providing accurate information for service delivery.
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                    <span className="text-slate-600 leading-relaxed">
+                      Customers are responsible for providing accurate information, timely access, and cooperation
+                      necessary for service delivery.
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">
-                      Timely access and cooperation necessary for service implementation.
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                    <span className="text-slate-600 leading-relaxed">
+                      Regular backup and security practices are recommended for optimal service performance.
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">
-                      Changes will be communicated and agreed upon before implementation.
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                    <span className="text-slate-600 leading-relaxed">
+                      Service level agreements are maintained through collaborative partnership and clear communication.
                     </span>
                   </li>
                 </ul>
@@ -366,29 +415,36 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-600 to-blue-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">Ready to Get Started?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-            Contact us for additional information, service customization, or consultation requests. Our team of experts
-            is ready to help you find the perfect cloud solution.
+      {/* Contact Section */}
+      <section className="py-24 bg-gradient-to-br from-green-600 to-green-700 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-xl mb-12 opacity-90 max-w-3xl mx-auto leading-relaxed">
+            For additional information, service customization, or consultation requests, please reach out to our expert
+            team. We're here to help you build the perfect cloud solution for your government agency.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/contact">
-                Contact Our Team
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="bg-white text-green-600 hover:bg-gray-100 font-medium px-8 py-4 text-lg"
+              asChild
+            >
+              <Link href="/contact">Contact Sales Team</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+              className="border-2 border-white text-white hover:bg-white hover:text-green-600 bg-transparent font-medium px-8 py-4 text-lg"
               asChild
             >
-              <Link href="/solutions">View Solutions</Link>
+              <Link href="/solutions">Explore Solutions</Link>
             </Button>
+          </div>
+          <div className="text-lg opacity-90">
+            <p className="mb-2">Get in touch with our cloud specialists</p>
+            <p className="text-base opacity-75">Email: info@insa.gov.et | Phone: +251-11-XXX-XXXX</p>
           </div>
         </div>
       </section>

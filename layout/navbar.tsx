@@ -30,9 +30,9 @@ export function Navbar() {
           <div className="flex items-center">
             <div className="flex items-center">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-red-600 rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white font-bold text-sm">IC</span>
+                <span className="text-white font-bold text-sm">G</span>
               </div>
-              <span className="text-xl font-semibold text-gray-900">INSA Cloud</span>
+              <span className="text-xl font-semibold text-gray-900">Gotera Cloud</span>
             </div>
           </div>
 

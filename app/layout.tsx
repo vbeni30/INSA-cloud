@@ -6,7 +6,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "INSA G-Cloud - Government Cloud Platform",
+  title: "Gotera Cloud",
   description:
     "Information Network Security Administration (INSA) Government Cloud provides secure, reliable, and scalable cloud solutions designed specifically for government agencies.",
   generator: "v0.dev",
