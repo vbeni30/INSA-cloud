@@ -38,7 +38,7 @@ export default function ContactPage() {
 
     try {
       const payload = new FormData()
-      payload.append("access_key", "2004e299-d624-4d3c-81b9-408d70316ced")
+      payload.append("access_key", "95592d15-9cca-44cb-8eb8-b1af19b55802")
 
       payload.append("email", "abrahamgebru@insa.gov.et")
 
