@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* Updated design tokens to match modern indigo and gray color scheme */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 28%;
+    --card: 220 14% 96%;
+    --card-foreground: 220 13% 28%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 28%;
+    --primary: 224 76% 25%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 220 14% 91%;
+    --secondary-foreground: 220 13% 28%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 224 76% 25%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 76% 25%;
+    --chart-1: 221 83% 53%;
+    --chart-2: 212 95% 68%;
+    --chart-3: 216 92% 79%;
+    --chart-4: 221 91% 91%;
+    --chart-5: 224 76% 48%;
+    --radius: 0.75rem;
+    --sidebar-background: 220 14% 96%;
+    --sidebar-foreground: 220 13% 28%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 220 13% 28%;
+    --sidebar-accent: 224 76% 25%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 224 76% 25%;
+
+    --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-serif: var(--font-montserrat), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+  .dark {
+    --background: 220 13% 9%;
+    --foreground: 0 0% 98%;
+    --card: 220 13% 16%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 220 13% 9%;
+    --secondary: 220 13% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 13% 16%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 220 13% 9%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 16%;
+    --input: 220 13% 16%;
+    --ring: 221 83% 53%;
+    --chart-1: 221 83% 53%;
+    --chart-2: 212 95% 68%;
+    --chart-3: 216 92% 79%;
+    --chart-4: 0 84% 60%;
+    --chart-5: 220 9% 65%;
+    --sidebar-background: 220 13% 16%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 220 13% 9%;
+    --sidebar-accent: 220 13% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 13% 16%;
+    --sidebar-ring: 221 83% 53%;
+  }
+}
+
+@layer components {
+  .heading-primary {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-foreground;
+    letter-spacing: -0.02em;
+  }
+
+  .heading-secondary {
+    @apply font-serif text-2xl md:text-3xl lg:text-4xl font-bold leading-tight tracking-tight text-foreground;
+    letter-spacing: -0.01em;
+  }
+
+  .heading-tertiary {
+    @apply font-serif text-xl md:text-2xl font-bold leading-snug tracking-tight text-foreground;
+  }
+
+  .body-large {
+    @apply font-sans text-lg leading-relaxed tracking-normal text-muted-foreground;
+    letter-spacing: 0.01em;
+  }
+
+  .body-regular {
+    @apply font-sans text-base leading-relaxed tracking-normal text-muted-foreground;
+    letter-spacing: 0.005em;
+  }
+
+  .body-small {
+    @apply font-sans text-sm leading-relaxed tracking-normal text-muted-foreground;
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .slider::-webkit-slider-track {
+    background: hsl(var(--border));
+    height: 8px;
+    border-radius: 4px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: hsl(var(--primary));
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    background: hsl(var(--primary) / 0.9);
+    transform: scale(1.1);
+  }
+
+  .slider::-moz-range-track {
+    background: hsl(var(--border));
+    height: 8px;
+    border-radius: 4px;
+    border: none;
+  }
+
+  .slider::-moz-range-thumb {
+    background: hsl(var(--primary));
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+
+  .slider::-moz-range-thumb:hover {
+    background: hsl(var(--primary) / 0.9);
+    transform: scale(1.1);
+  }
+
+  .form-input {
+    transition: all 0.2s ease;
+  }
+
+  .form-input:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.15);
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .card-modern {
+    @apply bg-card border border-border rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .pricing-card {
+    @apply bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-105;
+  }
+
+  .pricing-card-popular {
+    @apply bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary shadow-xl ring-2 ring-primary/20;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.2;
+    color: hsl(var(--foreground));
+  }
+
+  h1 {
+    @apply heading-primary;
+  }
+
+  h2 {
+    @apply heading-secondary;
+  }
+
+  h3 {
+    @apply heading-tertiary;
+  }
+
+  p {
+    @apply body-regular;
+    margin-bottom: 1rem;
+  }
+}
